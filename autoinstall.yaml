@@ -28,40 +28,40 @@ autoinstall:
   updates: all
   shutdown: reboot
 
-  late-commands:
-    # --- Instalação do Google Chrome ---
-    - curtin in-target --target=/target /bin/bash -c "wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -"
-    - curtin in-target --target=/target /bin/bash -c "echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' > /etc/apt/sources.list.d/google-chrome.list"
-    - curtin in-target --target=/target apt-get update
-    - curtin in-target --target=/target apt-get install -y google-chrome-stable
+  # late-commands:
+  #   # --- Instalação do Google Chrome ---
+  #   - curtin in-target --target=/target /bin/bash -c "wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -"
+  #   - curtin in-target --target=/target /bin/bash -c "echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' > /etc/apt/sources.list.d/google-chrome.list"
+  #   - curtin in-target --target=/target apt-get update
+  #   - curtin in-target --target=/target apt-get install -y google-chrome-stable
 
-    # --- Instalação do Visual Studio Code ---
-    - curtin in-target --target=/target /bin/bash -c "wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg"
-    - curtin in-target --target=/target /bin/bash -c "echo 'deb [arch=amd64] https://packages.microsoft.com/repos/code stable main' > /etc/apt/sources.list.d/vscode.list"
-    - curtin in-target --target=/target apt-get update
-    - curtin in-target --target=/target apt-get install -y code
+  #   # --- Instalação do Visual Studio Code ---
+  #   - curtin in-target --target=/target /bin/bash -c "wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg"
+  #   - curtin in-target --target=/target /bin/bash -c "echo 'deb [arch=amd64] https://packages.microsoft.com/repos/code stable main' > /etc/apt/sources.list.d/vscode.list"
+  #   - curtin in-target --target=/target apt-get update
+  #   - curtin in-target --target=/target apt-get install -y code
 
-    # --- Instalação do DBeaver Community Edition ---
-    - curtin in-target --target=/target /bin/bash -c "wget -O - https://dbeaver.io/debs/dbeaver.gpg.key | apt-key add -"
-    - curtin in-target --target=/target /bin/bash -c "echo 'deb https://dbeaver.io/debs/dbeaver-ce /' > /etc/apt/sources.list.d/dbeaver.list"
-    - curtin in-target --target=/target apt-get update
-    - curtin in-target --target=/target apt-get install -y dbeaver-ce
+  #   # --- Instalação do DBeaver Community Edition ---
+  #   - curtin in-target --target=/target /bin/bash -c "wget -O - https://dbeaver.io/debs/dbeaver.gpg.key | apt-key add -"
+  #   - curtin in-target --target=/target /bin/bash -c "echo 'deb https://dbeaver.io/debs/dbeaver-ce /' > /etc/apt/sources.list.d/dbeaver.list"
+  #   - curtin in-target --target=/target apt-get update
+  #   - curtin in-target --target=/target apt-get install -y dbeaver-ce
 
-    # --- Instalação do driver ODBC 18 da Microsoft ---
-    - curtin in-target --target=/target /bin/bash -c "curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -"
-    - curtin in-target --target=/target /bin/bash -c "curl https://packages.microsoft.com/config/ubuntu/24.04/prod.list > /etc/apt/sources.list.d/mssql-release.list"
-    - curtin in-target --target=/target apt-get update
-    - curtin in-target --target=/target /bin/bash -c "ACCEPT_EULA=Y apt-get install -y msodbcsql18"
+  #   # --- Instalação do driver ODBC 18 da Microsoft ---
+  #   - curtin in-target --target=/target /bin/bash -c "curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -"
+  #   - curtin in-target --target=/target /bin/bash -c "curl https://packages.microsoft.com/config/ubuntu/24.04/prod.list > /etc/apt/sources.list.d/mssql-release.list"
+  #   - curtin in-target --target=/target apt-get update
+  #   - curtin in-target --target=/target /bin/bash -c "ACCEPT_EULA=Y apt-get install -y msodbcsql18"
 
-    # --- Instalação do Homebrew (Linuxbrew) para o usuário servidorbi ---
-    - curtin in-target --target=/target /bin/bash -c "sudo -u servidorbi /bin/bash -c 'NONINTERACTIVE=1 /bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"'"
+  #   # --- Instalação do Homebrew (Linuxbrew) para o usuário servidorbi ---
+  #   - curtin in-target --target=/target /bin/bash -c "sudo -u servidorbi /bin/bash -c 'NONINTERACTIVE=1 /bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"'"
 
-    # --- Instalação do Miniconda e do JupyterLab ---
-    - curtin in-target --target=/target /bin/bash -c "sudo -u servidorbi wget -O /home/servidorbi/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
-    - curtin in-target --target=/target /bin/bash -c "sudo -u servidorbi bash /home/servidorbi/miniconda.sh -b -p /home/servidorbi/miniconda"
-    - curtin in-target --target=/target /bin/bash -c "sudo -u servidorbi /home/servidorbi/miniconda/bin/conda init"
-    - curtin in-target --target=/target /bin/bash -c "sudo -u servidorbi /home/servidorbi/miniconda/bin/conda install -y jupyterlab"
+  #   # --- Instalação do Miniconda e do JupyterLab ---
+  #   - curtin in-target --target=/target /bin/bash -c "sudo -u servidorbi wget -O /home/servidorbi/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
+  #   - curtin in-target --target=/target /bin/bash -c "sudo -u servidorbi bash /home/servidorbi/miniconda.sh -b -p /home/servidorbi/miniconda"
+  #   - curtin in-target --target=/target /bin/bash -c "sudo -u servidorbi /home/servidorbi/miniconda/bin/conda init"
+  #   - curtin in-target --target=/target /bin/bash -c "sudo -u servidorbi /home/servidorbi/miniconda/bin/conda install -y jupyterlab"
 
-    # --- Configuração do fzf no .bashrc para autocompletar ---
-    - curtin in-target --target=/target /bin/bash -c "sudo -u servidorbi sh -c 'echo \"[ -f /usr/share/doc/fzf/examples/key-bindings.bash ] && source /usr/share/doc/fzf/examples/key-bindings.bash\" >> /home/servidorbi/.bashrc'"
-    - curtin in-target --target=/target /bin/bash -c "sudo -u servidorbi sh -c 'echo \"[ -f /usr/share/doc/fzf/examples/completion.bash ] && source /usr/share/doc/fzf/examples/completion.bash\" >> /home/servidorbi/.bashrc'"
+  #   # --- Configuração do fzf no .bashrc para autocompletar ---
+  #   - curtin in-target --target=/target /bin/bash -c "sudo -u servidorbi sh -c 'echo \"[ -f /usr/share/doc/fzf/examples/key-bindings.bash ] && source /usr/share/doc/fzf/examples/key-bindings.bash\" >> /home/servidorbi/.bashrc'"
+  #   - curtin in-target --target=/target /bin/bash -c "sudo -u servidorbi sh -c 'echo \"[ -f /usr/share/doc/fzf/examples/completion.bash ] && source /usr/share/doc/fzf/examples/completion.bash\" >> /home/servidorbi/.bashrc'"
