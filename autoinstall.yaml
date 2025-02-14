@@ -13,7 +13,6 @@ autoinstall:
   timezone: "America/Sao_Paulo"
   packages:
     - libreoffice
-    - gimp
     - git
     - wget
     - tilix             # Terminal Tilix, alternativa ao iTerm
